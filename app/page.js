@@ -19,16 +19,16 @@ export default function Home() {
         <div className="row">
           <div className="col-md-3">
             <div className="mb-2">
-              <button type="button" class="btn btn-light" style={{width:"100%", textAlign:"left"}} onClick={()=>{setComponent('Domain')}}>Domain</button>
+              <button type="button" className="btn btn-light" style={{width:"100%", textAlign:"left"}} onClick={()=>{setComponent('Domain')}}>Domain</button>
             </div>
             <div className="mb-2">
-              <button type="button" class="btn btn-light" style={{width:"100%", textAlign:"left"}} onClick={()=>{setComponent('Hosting')}}>Hosting SSL</button>
+              <button type="button" className="btn btn-light" style={{width:"100%", textAlign:"left"}} onClick={()=>{setComponent('Hosting')}}>Hosting SSL</button>
             </div>
             <div className="mb-2">
-              <button type="button" class="btn btn-light" style={{width:"100%", textAlign:"left"}} onClick={()=>{setComponent('AMC')}}>AMC</button>
+              <button type="button" className="btn btn-light" style={{width:"100%", textAlign:"left"}} onClick={()=>{setComponent('AMC')}}>AMC</button>
             </div>
             <div className="mb-2">
-              <button type="button" class="btn btn-light" style={{width:"100%", textAlign:"left"}} onClick={()=>{setComponent('BEmail')}}>Business Email</button>
+              <button type="button" className="btn btn-light" style={{width:"100%", textAlign:"left"}} onClick={()=>{setComponent('BEmail')}}>Business Email</button>
             </div>
           </div>
           <div className="col-md-9 mt-4">

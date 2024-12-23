@@ -16,7 +16,7 @@ export async function GET(request) {
     try{
         connection = await mysql.createConnection(dbconfig)
 
-        const [rows] = await connection.execute('SELECT * FROM domains');
+        const [rows] = await connection.execute("SELECT `sr no`, `name` , `phone`,`email`,`service`,`description`, DATE_FORMAT(`sDate`, '%d-%m-%Y') AS `sDate`, DATE_FORMAT(`eDate`, '%d-%m-%Y') AS `eDate` FROM domains;");
 
         return new Response(JSON.stringify(rows), {
             status: 200,

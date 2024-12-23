@@ -48,24 +48,24 @@ export default function DomainForm({ onAddDomain }) {
 
             <div className="row">
 
-                <div class="mb-3 col-md-6 col-12">
-                    <label class="form-label">Name</label>
-                    <input type="text" class="form-control" id="name" value={Details.name} name='name' onChange={changed} />
+                <div className="mb-3 col-md-6 col-12">
+                    <label className="form-label">Name</label>
+                    <input type="text" className="form-control" id="name" value={Details.name} name='name' onChange={changed} />
                 </div>
 
-                <div class="mb-3  col-md-6 col-12">
-                    <label class="form-label">Phone</label>
-                    <input type="tel" class="form-control" id="phone" value={Details.phone} name='phone' onChange={changed} />
+                <div className="mb-3  col-md-6 col-12">
+                    <label className="form-label">Phone</label>
+                    <input type="tel" className="form-control" id="phone" value={Details.phone} name='phone' onChange={changed} />
                 </div>
 
-                <div class="mb-3  col-md-6 col-12">
-                    <label class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" value={Details.email} name='email' onChange={changed} />
+                <div className="mb-3  col-md-6 col-12">
+                    <label className="form-label">Email address</label>
+                    <input type="email" className="form-control" id="email" value={Details.email} name='email' onChange={changed} />
                 </div>
 
-                {/* <div class="mb-3 col-md-6 col-12">
-                    <label class="form-label">Service Name</label>
-                    <input type="text" class="form-control" id="service" value={Details.service} name='service' onChange={changed} />
+                {/* <div className="mb-3 col-md-6 col-12">
+                    <label className="form-label">Service Name</label>
+                    <input type="text" className="form-control" id="service" value={Details.service} name='service' onChange={changed} />
                 </div> */}
 
 <div className="mb-3 col-md-6 col-12">
@@ -87,24 +87,24 @@ export default function DomainForm({ onAddDomain }) {
                 </div>
 
                 <div className="mb-3 col-md-12 col-12">
-                    <label class="form-label">Service descriptionription</label>
-                    <input type="text" class="form-control" id="description" value={Details.description} name='description' onChange={changed} />
+                    <label className="form-label">Service descriptionription</label>
+                    <input type="text" className="form-control" id="description" value={Details.description} name='description' onChange={changed} />
                 </div>
 
 
 
-                <div class="mb-3 col-md-6 col-12">
-                    <label class="form-label">Claimed Date</label>
-                    <input type="date" class="form-control" id="sDate" value={Details.sDate} name='sDate' onChange={changed} />
+                <div className="mb-3 col-md-6 col-12">
+                    <label className="form-label">Claimed Date</label>
+                    <input type="date" className="form-control" id="sDate" value={Details.sDate} name='sDate' onChange={changed} />
                 </div>
 
-                <div class="mb-3 col-md-6 col-12">
-                    <label class="form-label">Expiry Date</label>
-                    <input type="date" class="form-control" id="eDate" value={Details.eDate} name='eDate' onChange={changed} />
+                <div className="mb-3 col-md-6 col-12">
+                    <label className="form-label">Expiry Date</label>
+                    <input type="date" className="form-control" id="eDate" value={Details.eDate} name='eDate' onChange={changed} />
                 </div>
 
                 <div className="mb-3 col-md-12 col-12">
-                    <button type="button" class="btn btn-primary" onClick={clickButton}>Add Entry</button>
+                    <button type="button" className="btn btn-primary" onClick={clickButton}>Add Entry</button>
                 </div>
             </div>
 

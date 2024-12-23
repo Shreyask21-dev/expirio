@@ -29,9 +29,9 @@ export default function Navbar() {
                 <li className="nav-item">
                   <Link className="nav-link " aria-current="page" href="/Clients">Clients</Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link className="nav-link " aria-current="page" href="/Subscription">Subscription</Link>
-                </li> 
+                </li>  */}
               </ul>
             </div>
           </div>

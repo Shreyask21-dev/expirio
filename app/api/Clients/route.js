@@ -16,7 +16,7 @@ export async function GET(request) {
     try{
         connection = await mysql.createConnection(dbconfig)
 
-        const [rows] = await connection.execute("SELECT `sr no`, `name` , `phone`,`email`,`service`,`description`, DATE_FORMAT(`sDate`, '%d-%m-%Y') AS `sDate`, DATE_FORMAT(`eDate`, '%d-%m-%Y') AS `eDate` FROM domains;");
+        const [rows] = await connection.execute("SELECT * FROM `clients`");
 
         return new Response(JSON.stringify(rows), {
             status: 200,
@@ -46,6 +46,7 @@ export async function GET(request) {
 
 }
 
+
 export async function POST(request) {
     console.log(request.method);
 
@@ -62,16 +63,16 @@ export async function POST(request) {
     };
 
     let connection;
-
+ 
     try {
         // Parse the incoming JSON body
         const requestBody = await request.json();
 
         // Extract the necessary fields from the request body
-        const { name, phone, email, service, description , sDate, eDate } = requestBody;
+        const { name, company, phone, email, description   } = requestBody;
 
         // Validate input data (you can customize validation as per your requirements)
-        if (!name || !phone || !email || !service || !description || !sDate || !eDate) {
+        if (!name || !company || !phone || !email || !description) {
             return new Response(
                 JSON.stringify({ error: 'Missing required fields' }),
                 {
@@ -86,18 +87,16 @@ export async function POST(request) {
 
         // Define the INSERT query to insert the new domain record into the database
         const query = `
-            INSERT INTO domains (name, phone, email, service, description, sDate, eDate) 
-            VALUES (?, ?, ?,? , ?, ?, ?)`;
+            INSERT INTO clients (name, company, phone, email, description) 
+            VALUES (?, ?, ?, ? , ?)`;
 
         // Execute the INSERT query with the values
         const [result] = await connection.execute(query, [
             name,
+            company,
             phone,
             email,
-            service,
             description,
-            sDate,
-            eDate,
         ]);
 
         // Respond with a success message and the inserted record's ID
@@ -161,7 +160,7 @@ export async function DELETE(request) {
         connection = await mysql.createConnection(dbconfig);
 
         // Define the DELETE query to remove the record from the database
-        const query = `DELETE FROM domains WHERE \`sr no\` = ?`;
+        const query = `DELETE FROM clients WHERE \`sr no\` = ?`;
 
         // Execute the DELETE query with the ID
         const [result] = await connection.execute(query, [id]);
@@ -223,10 +222,10 @@ export async function PUT(request) {
         const requestBody = await request.json();
 
         // Extract the necessary fields from the request body
-        const { id, name, phone, email, service, description, sDate, eDate } = requestBody;
+        const { id, name, company, phone, email, description } = requestBody;
 
         // Validate input data
-        if (!id || !name || !phone || !email || !service || !description || !sDate || !eDate) {
+        if (!id || !name || !company || !phone || !email || !description ) {
             return new Response(
                 JSON.stringify({ error: 'Missing required fields' }),
                 {
@@ -241,19 +240,17 @@ export async function PUT(request) {
 
         // Define the UPDATE query to update the record in the database
         const query = `
-            UPDATE domains
-            SET name = ?, phone = ?, email = ?, service = ?, description = ?, sDate = ?, eDate = ?
+            UPDATE clients
+            SET name = ?, company = ?, phone = ?, email = ?, description = ?
             WHERE \`sr no\` = ?`;
 
         // Execute the UPDATE query with the values
         const [result] = await connection.execute(query, [
             name,
+            company,
             phone,
             email,
-            service,
             description,
-            sDate,
-            eDate,
             id,
         ]);
 

@@ -4,6 +4,9 @@ import $ from 'jquery'
 import DataTable from 'datatables.net-dt';
 import DomainForm from './Forms/DomainForm';
 import axios from 'axios';
+import EditPopUp from './EditPopUp';
+
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
 export default function Domain() {
 
@@ -56,7 +59,7 @@ export default function Domain() {
         { title: 'email' },
         { title: 'service' },
         { title: 'description' },
-        { title: 'claimed' },
+        { title: 'Launch Date' },
         { title: 'expiry' },
       ],
       drawCallback: function () {
@@ -106,32 +109,128 @@ export default function Domain() {
   };
 
 
+  const [Popup, setPopup] = useState(false)
+  const [CurrentRecord, setCurrentRecord] = useState([]);
+
+  const editRecord = async (id) => {
+    const record = TableData.find((entry)=>entry[0]== id)
+    setCurrentRecord({
+      id: record[0],
+      name: record[1],
+      phone: record[2],
+      email: record[3],
+      service:record[4],
+      description:record[5],
+      sDate:record[6],
+      eDate:record[7]
+      // Map other fields as necessary
+    });
+    setPopup(true)
+  }
+
+  const handleUpdate = async (updatedRecord) => {
+    try {
+      const response = await axios.put(`http://localhost:3000/api/Domains`, updatedRecord);
+      if (response.data.message === 'Record successfully updated') {
+        alert('Record updated successfully');
+        setPopup(false);
+        getDomains(); // Refresh data
+      } else {
+        alert('Failed to update record');
+      }
+    } catch (error) {
+      console.error('Error updating record:', error);
+    }
+  };
+
+
+  const deleteRecord = async (id) => {
+    const response = await axios.delete(`http://localhost:3000/api/Domains?id=${id}`)
+    if (response.data.message == "Record successfully deleted"){
+      alert("Record successfully deleted")
+      getDomains()
+    }
+    else{
+      alert("Error while deleting record")
+
+    }
+  }
   
 
   useEffect(() => {
+    // const initializeDataTable = () => {
+    //   if ($.fn.dataTable.isDataTable('#myTable')) {
+    //     const table = $('#myTable').DataTable();
+    //     table.destroy(); // Destroy the existing instance
+    //   }
+  
+    //   new DataTable('#myTable', {
+    //     data: TableData,
+    //     columns: [
+    //       { title: 'Sr.no' },
+    //       { title: 'Name' },
+    //       { title: 'Phone no.' },
+    //       { title: 'Email' },
+    //       { title: 'Service' },
+    //       { title: 'Description' },
+    //       { title: 'Launch ' },
+    //       { title: 'Expiry ' },
+    //       { title: 'Actions ' },
+    //     ],
+    //     drawCallback: function () {
+    //       addCustomClassToPagingButtons();
+    //     },
+    //   });
+    // };
+
     const initializeDataTable = () => {
       if ($.fn.dataTable.isDataTable('#myTable')) {
         const table = $('#myTable').DataTable();
         table.destroy(); // Destroy the existing instance
       }
-  
+    
       new DataTable('#myTable', {
         data: TableData,
         columns: [
-          { title: 'sr.no' },
-          { title: 'name' },
-          { title: 'phone no.' },
-          { title: 'email' },
-          { title: 'service' },
-          { title: 'description' },
-          { title: 'claimed' },
-          { title: 'expiry' },
+          { title: 'Sr.no' },
+          { title: 'Name' },
+          { title: 'Phone no.' },
+          { title: 'Email' },
+          { title: 'Service' },
+          { title: 'Description' },
+          { title: 'Launch ' },
+          { title: 'Expiry ' },
+          {
+            title: 'Actions',
+            render: function (data, type, row, meta) {
+              return `
+                <button class="btn-edit btn btn-primary mb-2" data-id="${row[0]}">Edit</button>
+                <button class="btn-delete btn btn-danger mb-2" data-id="${row[0]}">Delete</button>
+              `;
+            },
+          },
         ],
         drawCallback: function () {
           addCustomClassToPagingButtons();
+    
+          // Attach click event listeners to buttons
+          document.querySelectorAll('.btn-edit').forEach((button) => {
+            button.addEventListener('click', (e) => {
+              console.log('Edit ID:', e.target.dataset.id);
+              editRecord(e.target.dataset.id)
+            });
+          });
+    
+          document.querySelectorAll('.btn-delete').forEach((button) => {
+            button.addEventListener('click', (e) => {
+              console.log('Delete ID:', e.target.dataset.id);
+              deleteRecord(e.target.dataset.id)
+            });
+          });
         },
       });
     };
+    
   
     if (TableData.length > 0) {
       initializeDataTable();
@@ -163,10 +262,17 @@ const handleAddDomain = async (newDomain) => {
       <div className='card card-body '> 
         <DomainForm onAddDomain={handleAddDomain} />
       </div>
-      <div className='card card-body my-4'>
-        <h1>All Domain Holders </h1>
+      <div className='card card-body my-4' style={{overflowX:"scroll"}}>
+        <h1>Subscription Holders </h1>
         <table id='myTable' className="display table table-striped" style={{ width: '100%' }}></table>
       </div>
+
+      {Popup && (
+        <EditPopUp
+          currentRecord={CurrentRecord}
+          onClose={() => setPopup(false)}
+          onUpdate={handleUpdate}
+        />)}
     </div>
   )
 }

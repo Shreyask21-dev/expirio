@@ -8,7 +8,7 @@ export default function DomainForm({ onAddDomain }) {
         phone: "",
         email: "",
         service: "",
-        description:"",
+        description: "",
         sDate: "",
         eDate: ""
     })
@@ -21,30 +21,30 @@ export default function DomainForm({ onAddDomain }) {
         }));
     }
 
-    const clickButton =  async () => {
+    const clickButton = async () => {
 
         console.log(Details)
 
         onAddDomain(Details)
 
         // Clear the form after submission (optional)
-    setDetails({
-        name: '',
-        phone: '',
-        email: '',
-        service: '',
-        description: '',
-        sDate: '',
-        eDate: '',
-      });
+        setDetails({
+            name: '',
+            phone: '',
+            email: '',
+            service: '',
+            description: '',
+            sDate: '',
+            eDate: '',
+        });
 
-    
+
     }
 
     return (
         <div>
 
-            <h1>Enter Domain holder details</h1>
+            <h1>Subscription details</h1>
 
             <div className="row">
 
@@ -68,7 +68,7 @@ export default function DomainForm({ onAddDomain }) {
                     <input type="text" className="form-control" id="service" value={Details.service} name='service' onChange={changed} />
                 </div> */}
 
-<div className="mb-3 col-md-6 col-12">
+                <div className="mb-3 col-md-6 col-12">
                     <label className="form-label">Service Name</label>
                     <select
                         className="form-control"

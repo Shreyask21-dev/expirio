@@ -3,14 +3,34 @@ import React, { useEffect, useState } from "react";
 import styles from "./page.module.css";
 import Navbar from "./Components/Navbar";
 import Domain from "./Components/Domain";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
 
-  const [Component, setComponent] = useState('Domain')
+  const router = useRouter();
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+
+  useEffect(() => {
+    const user = localStorage.getItem('userName');
+
+    if (!user) {
+      // If userName is not found, redirect immediately
+      router.push('/Login/');
+    } else {
+      setIsCheckingAuth(false); // Authentication check completed
+    }
+  }, [router]);
+
+  if (isCheckingAuth) {
+    // While checking authentication, prevent rendering the page
+    return <div>Redirecting...</div>;
+  }
+
+
 
   return (
     <div>
-      
+  
       <Navbar />
 
       <div className="container mt-4">

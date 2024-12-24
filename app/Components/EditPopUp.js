@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 export default function EditPopUp({ currentRecord, onClose, onUpdate }) {
 
@@ -8,6 +8,10 @@ export default function EditPopUp({ currentRecord, onClose, onUpdate }) {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
+
+    useEffect(() => {
+        setFormData(currentRecord); // Update formData when currentRecord changes
+      }, [currentRecord]);
 
     const handleSubmit = (e) => {
         e.preventDefault();

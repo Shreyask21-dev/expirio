@@ -9,7 +9,7 @@ export default function page() {
     const router = useRouter()  
 
     const onsubmited = async (object) => {
-        const response = await axios.post('http://localhost:3000/api/Login', object)
+        const response = await axios.post('https://expirio.vercel.app/api/Login', object)
 
         console.log(response.data)
 

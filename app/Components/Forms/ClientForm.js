@@ -19,11 +19,30 @@ export default function ClientForm({ onAdd }) {
     }
 
     const clickButton = async () => {
-
-        console.log(Details)
-
-        onAdd(Details)
-
+        // Validation: Check if any field is empty
+        const { name, company, phone, email, description } = Details;
+        if (!name || !company || !phone || !email || !description) {
+            alert("All fields must be filled out.");
+            return; // Exit the function if validation fails
+        }
+    
+        // Phone validation: Check if phone is exactly 10 digits and only numbers
+        const phoneRegex = /^[0-9]{10}$/; // Regular expression for 10 digits
+        if (!phoneRegex.test(phone)) {
+            alert("Phone number must be exactly 10 digits and contain only numbers.");
+            return; // Exit the function if phone validation fails
+        }
+    
+        // Email validation: Check if email is valid
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
+        if (!emailRegex.test(email)) {
+            alert("Please enter a valid email address.");
+            return; // Exit the function if email validation fails
+        }
+    
+        console.log(Details);
+        onAdd(Details);
+    
         // Clear the form after submission (optional)
         setDetails({
             name: '',
@@ -32,8 +51,6 @@ export default function ClientForm({ onAdd }) {
             email: '',
             description: '',
         });
-
-
     }
 
     return (

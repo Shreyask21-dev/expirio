@@ -238,7 +238,7 @@ export async function PUT(request) {
         const requestBody = await request.json();
 
         // Extract the necessary fields from the request body
-        const { id, name, phone, email, service, description, sDate, eDate } = requestBody;
+        const { 'sr no': id, name, phone, email, service, description, sDate, eDate } = requestBody;
 
         // Validate input data
         if (!id || !name || !phone || !email || !service || !description || !sDate || !eDate) {

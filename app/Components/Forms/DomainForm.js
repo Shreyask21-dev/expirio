@@ -17,41 +17,54 @@ export default function DomainForm({ onAddDomain, tableData }) {
         email: false,
     });
 
+    // Helper to get unique entries
+    const getUniqueEntries = (data) => {
+        const seen = new Set();
+        return data.filter((entry) => {
+            const key = `${entry.name}-${entry.phone}-${entry.email}`;
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+        });
+    };
+
+    const uniqueEntries = getUniqueEntries(tableData);
+
     const handleFieldChange = (e) => {
         const { name, value } = e.target;
-        setDetails(prevDetails => ({
+        setDetails((prevDetails) => ({
             ...prevDetails,
-            [name]: value
+            [name]: value,
         }));
 
         // Auto-fill phone and email when name is selected
         if (name === "name" && value !== "Add New") {
-            const selectedEntry = tableData.find(entry => entry.name === value);
+            const selectedEntry = tableData.find((entry) => entry.name === value);
             if (selectedEntry) {
-                setDetails(prevDetails => ({
+                setDetails((prevDetails) => ({
                     ...prevDetails,
                     phone: selectedEntry.phone,
-                    email: selectedEntry.email
+                    email: selectedEntry.email,
                 }));
                 setAddingNew({ name: false, phone: false, email: false });
             } else {
-                setDetails(prevDetails => ({
+                setDetails((prevDetails) => ({
                     ...prevDetails,
                     phone: "",
-                    email: ""
+                    email: "",
                 }));
             }
         }
     };
 
     const handleAddNew = (field) => {
-        setAddingNew(prevState => ({
+        setAddingNew((prevState) => ({
             ...prevState,
-            [field]: true
+            [field]: true,
         }));
-        setDetails(prevDetails => ({
+        setDetails((prevDetails) => ({
             ...prevDetails,
-            [field]: ""
+            [field]: "",
         }));
     };
 
@@ -105,7 +118,7 @@ export default function DomainForm({ onAddDomain, tableData }) {
                                 onChange={handleFieldChange}
                             >
                                 <option value="">Select a name</option>
-                                {tableData.map((entry) => (
+                                {uniqueEntries.map((entry) => (
                                     <option key={entry.id} value={entry.name}>
                                         {entry.name}
                                     </option>
@@ -200,7 +213,7 @@ export default function DomainForm({ onAddDomain, tableData }) {
                         <option value="Domain + Hosting SSL">Domain + Hosting SSL</option>
                         <option value="Hosting SSL">Hosting SSL</option>
                         <option value="AMC">AMC</option>
-                        <option value="Business">Email</option>
+                        <option value="Business Email">Email</option>
                     </select>
                 </div>
 

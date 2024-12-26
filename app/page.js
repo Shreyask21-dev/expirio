@@ -1,6 +1,5 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import styles from "./page.module.css";
 import Navbar from "./Components/Navbar";
 import Domain from "./Components/Domain";
 import { useRouter } from "next/navigation";
@@ -29,7 +28,7 @@ export default function Home() {
 
 
   return (
-    <div>
+    <div style={{backgroundColor:"#ffffff"}}>
   
       <Navbar />
 

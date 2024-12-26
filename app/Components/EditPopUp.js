@@ -110,6 +110,18 @@ export default function EditPopUp({ currentRecord, onClose, onUpdate }) {
                             <option value="Business">Email</option>
                         </select>
                     </div>
+
+                    <div className="form-group mb-2">
+                        <label className="form-label">Description</label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            name="description"
+                            value={formData.description || ''}
+                            onChange={handleChange}
+                        />
+                    </div>
+
                     <div className="form-group mb-2">
                         <label className="form-label">Claimed Date</label>
                         <input

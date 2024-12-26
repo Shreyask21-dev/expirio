@@ -54,7 +54,7 @@ export default function ClientForm({ onAdd }) {
     }
 
     return (
-        <div>
+        <div style={{backgroundColor:"#ffffff"}}>
             <h1>Client Addition Form</h1>
             <div className="row">
 

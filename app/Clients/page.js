@@ -27,7 +27,7 @@ export default function page() {
   
   
   return (
-    <div>
+    <div style={{backgroundColor:"#ffffff"}}>
     
       <Navbar />
     

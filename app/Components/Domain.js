@@ -157,10 +157,10 @@ export default function Domain() {
   };
 
   return (
-    <div>
+    <div style={{backgroundColor:"#ffffff"}}>
       <div className='card card-body '>
 
-        <DomainForm onAddDomain={handleAddDomain} />
+        <DomainForm onAddDomain={handleAddDomain} tableData={tableData} />
       </div>
       <div className='card card-body my-4' style={{ overflowX: "scroll" }}>
 

@@ -1,8 +1,6 @@
-import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
-export default function DomainForm({ onAddDomain }) {
-
+export default function DomainForm({ onAddDomain, tableData }) {
     const [Details, setDetails] = useState({
         name: "",
         phone: "",
@@ -11,80 +9,183 @@ export default function DomainForm({ onAddDomain }) {
         description: "",
         sDate: "",
         eDate: ""
-    })
+    });
 
-    const changed = (e) => {
-        const { name, value } = e.target; // Destructure name and value from the event target
+    const [addingNew, setAddingNew] = useState({
+        name: false,
+        phone: false,
+        email: false,
+    });
+
+    const handleFieldChange = (e) => {
+        const { name, value } = e.target;
         setDetails(prevDetails => ({
             ...prevDetails,
-            [name]: value // Update the specific field based on the input's name
+            [name]: value
         }));
-    }
+
+        // Auto-fill phone and email when name is selected
+        if (name === "name" && value !== "Add New") {
+            const selectedEntry = tableData.find(entry => entry.name === value);
+            if (selectedEntry) {
+                setDetails(prevDetails => ({
+                    ...prevDetails,
+                    phone: selectedEntry.phone,
+                    email: selectedEntry.email
+                }));
+                setAddingNew({ name: false, phone: false, email: false });
+            } else {
+                setDetails(prevDetails => ({
+                    ...prevDetails,
+                    phone: "",
+                    email: ""
+                }));
+            }
+        }
+    };
+
+    const handleAddNew = (field) => {
+        setAddingNew(prevState => ({
+            ...prevState,
+            [field]: true
+        }));
+        setDetails(prevDetails => ({
+            ...prevDetails,
+            [field]: ""
+        }));
+    };
 
     const clickButton = async () => {
-        // Validation: Check if any field is empty
         const { name, phone, email, service, description, sDate, eDate } = Details;
-        if (!name || !phone || !email || !service || !description|| !sDate|| !eDate   ) {
+        if (!name || !phone || !email || !service || !description || !sDate || !eDate) {
             alert("All fields must be filled out.");
-            return; // Exit the function if validation fails
+            return;
         }
-    
-        // Phone validation: Check if phone is exactly 10 digits and only numbers
-        const phoneRegex = /^[0-9]{10}$/; // Regular expression for 10 digits
+
+        const phoneRegex = /^[0-9]{10}$/;
         if (!phoneRegex.test(phone)) {
             alert("Phone number must be exactly 10 digits and contain only numbers.");
-            return; // Exit the function if phone validation fails
+            return;
         }
-    
-        // Email validation: Check if email is valid
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email)) {
             alert("Please enter a valid email address.");
-            return; // Exit the function if email validation fails
+            return;
         }
-    
+
         console.log(Details);
         onAddDomain(Details);
-    
-        // Clear the form after submission (optional)
+
         setDetails({
             name: '',
             phone: '',
             email: '',
-            service:'',
+            service: '',
             description: '',
-            sDate:'',
-            eDate:''
+            sDate: '',
+            eDate: ''
         });
-    }
+        setAddingNew({ name: false, phone: false, email: false });
+    };
 
     return (
         <div>
-
-            <h1>Subscription details</h1>
-
+            <h1>Subscription Details</h1>
             <div className="row">
-
                 <div className="mb-3 col-md-6 col-12">
                     <label className="form-label">Name</label>
-                    <input type="text" className="form-control" id="name" value={Details.name} name='name' onChange={changed} />
+                    {!addingNew.name ? (
+                        <>
+                            <select
+                                className="form-control"
+                                id="name"
+                                value={Details.name}
+                                name="name"
+                                onChange={handleFieldChange}
+                            >
+                                <option value="">Select a name</option>
+                                {tableData.map((entry) => (
+                                    <option key={entry.id} value={entry.name}>
+                                        {entry.name}
+                                    </option>
+                                ))}
+                                <option value="Add New">Add New</option>
+                            </select>
+                            {Details.name === "Add New" && (
+                                <button
+                                    type="button"
+                                    className="btn btn-link"
+                                    onClick={() => handleAddNew("name")}
+                                >
+                                    Add New Name
+                                </button>
+                            )}
+                        </>
+                    ) : (
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="name"
+                            value={Details.name}
+                            name="name"
+                            onChange={handleFieldChange}
+                            placeholder="Enter new name"
+                        />
+                    )}
                 </div>
 
-                <div className="mb-3  col-md-6 col-12">
+                <div className="mb-3 col-md-6 col-12">
                     <label className="form-label">Phone</label>
-                    <input type="tel" className="form-control" id="phone" value={Details.phone} name='phone' onChange={changed} />
+                    {!addingNew.phone ? (
+                        <input
+                            type="tel"
+                            className="form-control"
+                            id="phone"
+                            value={Details.phone}
+                            name="phone"
+                            onChange={handleFieldChange}
+                            placeholder="Auto-filled or enter manually"
+                        />
+                    ) : (
+                        <input
+                            type="tel"
+                            className="form-control"
+                            id="phone"
+                            value={Details.phone}
+                            name="phone"
+                            onChange={handleFieldChange}
+                            placeholder="Enter new phone number"
+                        />
+                    )}
                 </div>
 
-                <div className="mb-3  col-md-6 col-12">
-                    <label className="form-label">Email address</label>
-                    <input type="email" className="form-control" id="email" value={Details.email} name='email' onChange={changed} />
+                <div className="mb-3 col-md-6 col-12">
+                    <label className="form-label">Email</label>
+                    {!addingNew.email ? (
+                        <input
+                            type="email"
+                            className="form-control"
+                            id="email"
+                            value={Details.email}
+                            name="email"
+                            onChange={handleFieldChange}
+                            placeholder="Auto-filled or enter manually"
+                        />
+                    ) : (
+                        <input
+                            type="email"
+                            className="form-control"
+                            id="email"
+                            value={Details.email}
+                            name="email"
+                            onChange={handleFieldChange}
+                            placeholder="Enter new email"
+                        />
+                    )}
                 </div>
 
-                {/* <div className="mb-3 col-md-6 col-12">
-                    <label className="form-label">Service Name</label>
-                    <input type="text" className="form-control" id="service" value={Details.service} name='service' onChange={changed} />
-                </div> */}
-
+                {/* Remaining Fields */}
                 <div className="mb-3 col-md-6 col-12">
                     <label className="form-label">Service Name</label>
                     <select
@@ -92,7 +193,7 @@ export default function DomainForm({ onAddDomain }) {
                         id="service"
                         value={Details.service}
                         name="service"
-                        onChange={changed}
+                        onChange={handleFieldChange}
                     >
                         <option value="">Select a service</option>
                         <option value="Domain">Domain</option>
@@ -105,26 +206,39 @@ export default function DomainForm({ onAddDomain }) {
 
                 <div className="mb-3 col-md-12 col-12">
                     <label className="form-label">Service descriptionription</label>
-                    <input type="text" className="form-control" id="description" value={Details.description} name='description' onChange={changed} />
+                    <input type="text" className="form-control" id="description" value={Details.description} name='description' onChange={handleFieldChange} />
                 </div>
-
-
 
                 <div className="mb-3 col-md-6 col-12">
                     <label className="form-label">Claimed Date</label>
-                    <input type="date" className="form-control" id="sDate" value={Details.sDate} name='sDate' onChange={changed} />
+                    <input
+                        type="date"
+                        className="form-control"
+                        id="sDate"
+                        value={Details.sDate}
+                        name="sDate"
+                        onChange={handleFieldChange}
+                    />
                 </div>
 
                 <div className="mb-3 col-md-6 col-12">
                     <label className="form-label">Expiry Date</label>
-                    <input type="date" className="form-control" id="eDate" value={Details.eDate} name='eDate' onChange={changed} />
+                    <input
+                        type="date"
+                        className="form-control"
+                        id="eDate"
+                        value={Details.eDate}
+                        name="eDate"
+                        onChange={handleFieldChange}
+                    />
                 </div>
 
                 <div className="mb-3 col-md-12 col-12">
-                    <button type="button" className="btn btn-primary" onClick={clickButton}>Add Entry</button>
+                    <button type="button" className="btn btn-primary" onClick={clickButton}>
+                        Add Entry
+                    </button>
                 </div>
             </div>
-
         </div>
-    )
+    );
 }

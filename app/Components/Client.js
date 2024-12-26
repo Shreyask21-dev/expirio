@@ -151,7 +151,7 @@ export default function Client() {
 
 
   return (
-    <div>
+    <div style={{backgroundColor:"#ffffff"}}>
       <div className='card card-body '>
         {/* <DomainForm onAddDomain={handleAddDomain} /> */}
         <ClientForm onAdd={handleAddClients}/>

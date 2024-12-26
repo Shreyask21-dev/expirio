@@ -21,7 +21,7 @@ export default function page() {
     }
 
   return (
-    <div>
+    <div style={{backgroundColor:"#ffffff"}}>
         <LoginForm submit={onsubmited} />
     </div>
   )

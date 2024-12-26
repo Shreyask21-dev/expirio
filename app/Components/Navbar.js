@@ -75,7 +75,7 @@ export default function Navbar() {
 
             <div>
               <Link className="navbar-brand" href="/">
-                <img src='/images/logo.png' style={{ width: "20%" }} />
+                <img src='/images/logo.png' style={{ width: "30%" }} />
               </Link>
             </div>
 

@@ -19,7 +19,7 @@ export default function Client() {
   // Fetch data from the API
   const fetchDomains = async () => {
     try {
-      const response = await axios.get('https://expirio.vercel.app/api/Clients');
+      const response = await axios.get('http://localhost:3000/api/Clients');
       const data = response.data.map((item, index) => ({
         id: index + 1,
         ...item,
@@ -94,7 +94,7 @@ export default function Client() {
        
 
   const deleteRecord = async (id) => {
-    const response = await axios.delete(`https://expirio.vercel.app/api/Clients?id=${id}`)
+    const response = await axios.delete(`http://localhost:3000/api/Clients?id=${id}`)
     if (response.data.message == "Record successfully deleted"){
       alert("Record successfully deleted")
       fetchDomains()
@@ -108,7 +108,7 @@ export default function Client() {
   // Function to handle adding a domain and updating the table data
   const handleAddClients = async (client) => {
     // Update the server with the new domain (same as your DomainForm logic)
-    const response = await axios.post('https://expirio.vercel.app/api/Clients', client);
+    const response = await axios.post('http://localhost:3000/api/Clients', client);
 
     if (response.data.message === 'Domain successfully added') {
       alert('Record added successfully');
@@ -135,7 +135,7 @@ export default function Client() {
 
   const handleUpdate = async (updatedRecord) => {
     try {
-      const response = await axios.put(`https://expirio.vercel.app/api/Clients`, updatedRecord);
+      const response = await axios.put(`http://localhost:3000/api/Clients`, updatedRecord);
       if (response.data.message === 'Record successfully updated') {
         alert('Record updated successfully');
         setPopup(false);

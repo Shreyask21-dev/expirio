@@ -21,7 +21,14 @@ export async function GET(request) {
     try{
         connection = await mysql.createConnection(dbconfig)
 
-        const [rows] = await connection.execute("SELECT `sr no`, `name` , `phone`,`email`,`service`,`description`, DATE_FORMAT(`sDate`, '%d-%m-%Y') AS `sDate`, DATE_FORMAT(`eDate`, '%d-%m-%Y') AS `eDate` FROM domains;");
+        // const [rows] = await connection.execute("SELECT `sr no`, `name` , `phone`,`email`,`service`,`description`, DATE_FORMAT(`sDate`, '%d-%m-%Y') AS `sDate`, DATE_FORMAT(`eDate`, '%d-%m-%Y') AS `eDate` FROM domains;");
+
+        // Decending order
+        // const [rows] = await connection.execute("SELECT  `sr no`, `name`, `phone`, `email`,     `service`, `description`, DATE_FORMAT(`sDate`, '%d-%m-%Y') AS `sDate`, DATE_FORMAT(`eDate`, '%d-%m-%Y') AS `eDate`, DATE_FORMAT(`eDate`, '%M %Y') AS `eDate_Month` FROM domains ORDER BY     YEAR(`eDate`) DESC, MONTH(`eDate`) DESC, `eDate` DESC;");
+
+
+// ascending order
+        const [rows] = await connection.execute("SELECT `sr no`, `name`, `phone`, `email`, `service`,    `description`, DATE_FORMAT(`sDate`, '%d-%m-%Y') AS `sDate`, DATE_FORMAT(`eDate`, '%d-%m-%Y') AS `eDate`, DATE_FORMAT(`eDate`, '%M %Y') AS `eDate_Month` FROM domains ORDER BY YEAR(`eDate`) ASC,  MONTH(`eDate`) ASC, `eDate` ASC;");
 
         return new Response(JSON.stringify(rows), {
             status: 200,

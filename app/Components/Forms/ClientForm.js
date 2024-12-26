@@ -55,31 +55,31 @@ export default function ClientForm({ onAdd }) {
 
     return (
         <div style={{backgroundColor:"#ffffff"}}>
-            <h1>Client Addition Form</h1>
+            <h1 className='text-dark'>Client Addition Form</h1>
             <div className="row">
 
                 <div className="mb-3 col-md-6 col-12">
-                    <label className="form-label">Name</label>
+                    <label className="form-label text-dark">Name</label>
                     <input type="text" className="form-control" id="name" name='name' value={Details.name} onChange={changed}/>
                 </div>
 
                 <div className="mb-3 col-md-6 col-12">
-                    <label className="form-label">Company Name</label>
+                    <label className="form-label text-dark">Company Name</label>
                     <input type="text" className="form-control" id="company" name='company' value={Details.company} onChange={changed}/>
                 </div>
 
                 <div className="mb-3 col-md-6 col-12">
-                    <label className="form-label">Phone</label>
+                    <label className="form-label text-dark">Phone</label>
                     <input type="tele" className="form-control" id="phone" name='phone' value={Details.phone} onChange={changed}/>
                 </div>
 
                 <div className="mb-3 col-md-6 col-12">
-                    <label className="form-label">Email</label>
+                    <label className="form-label text-dark">Email</label>
                     <input type="email" className="form-control" id="email" name='email' value={Details.email} onChange={changed}/>
                 </div>
 
                 <div className="mb-3 col-md-12 col-12">
-                    <label className="form-label">Service description</label>
+                    <label className="form-label text-dark">Service description</label>
                     <input type="text" className="form-control" id="description" name='description' value={Details.description} onChange={changed}/>
                 </div>
 

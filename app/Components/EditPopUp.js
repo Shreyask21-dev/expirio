@@ -107,7 +107,7 @@ export default function EditPopUp({ currentRecord, onClose, onUpdate }) {
                             </option>
                             <option value="Hosting SSL">Hosting SSL</option>
                             <option value="AMC">AMC</option>
-                            <option value="Business">Email</option>
+                            <option value="Business Email">Email</option>
                         </select>
                     </div>
 

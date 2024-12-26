@@ -104,10 +104,10 @@ export default function DomainForm({ onAddDomain, tableData }) {
 
     return (
         <div>
-            <h1>Subscription Details</h1>
+            <h1 className='text-dark'>Subscription Details</h1>
             <div className="row">
                 <div className="mb-3 col-md-6 col-12">
-                    <label className="form-label">Name</label>
+                    <label className="form-label text-dark">Name</label>
                     {!addingNew.name ? (
                         <>
                             <select
@@ -149,7 +149,7 @@ export default function DomainForm({ onAddDomain, tableData }) {
                 </div>
 
                 <div className="mb-3 col-md-6 col-12">
-                    <label className="form-label">Phone</label>
+                    <label className="form-label text-dark">Phone</label>
                     {!addingNew.phone ? (
                         <input
                             type="tel"
@@ -174,7 +174,7 @@ export default function DomainForm({ onAddDomain, tableData }) {
                 </div>
 
                 <div className="mb-3 col-md-6 col-12">
-                    <label className="form-label">Email</label>
+                    <label className="form-label text-dark">Email</label>
                     {!addingNew.email ? (
                         <input
                             type="email"
@@ -200,7 +200,7 @@ export default function DomainForm({ onAddDomain, tableData }) {
 
                 {/* Remaining Fields */}
                 <div className="mb-3 col-md-6 col-12">
-                    <label className="form-label">Service Name</label>
+                    <label className="form-label text-dark">Service Name</label>
                     <select
                         className="form-control"
                         id="service"
@@ -218,12 +218,12 @@ export default function DomainForm({ onAddDomain, tableData }) {
                 </div>
 
                 <div className="mb-3 col-md-12 col-12">
-                    <label className="form-label">Service Description</label>
+                    <label className="form-label text-dark">Service Description</label>
                     <input type="text" className="form-control" id="description" value={Details.description} name='description' onChange={handleFieldChange} />
                 </div>
 
                 <div className="mb-3 col-md-6 col-12">
-                    <label className="form-label">Launch Date</label>
+                    <label className="form-label text-dark">Launch Date</label>
                     <input
                         type="date"
                         className="form-control"
@@ -235,7 +235,7 @@ export default function DomainForm({ onAddDomain, tableData }) {
                 </div>
 
                 <div className="mb-3 col-md-6 col-12">
-                    <label className="form-label">Expiry Date</label>
+                    <label className="form-label text-dark">Expiry Date</label>
                     <input
                         type="date"
                         className="form-control"

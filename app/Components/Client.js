@@ -201,10 +201,10 @@ export default function Client() {
 
         {/* Pagination */}
         <div className="pagination-controls" style={{ marginTop: '1rem' }}>
-          <button onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
+          <button className="btn btn-outline-dark" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
             Previous
           </button>
-          <button onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
+          <button className="btn btn-outline-dark mx-3" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
             Next
           </button>
           <span>

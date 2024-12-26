@@ -218,12 +218,12 @@ export default function DomainForm({ onAddDomain, tableData }) {
                 </div>
 
                 <div className="mb-3 col-md-12 col-12">
-                    <label className="form-label">Service descriptionription</label>
+                    <label className="form-label">Service Description</label>
                     <input type="text" className="form-control" id="description" value={Details.description} name='description' onChange={handleFieldChange} />
                 </div>
 
                 <div className="mb-3 col-md-6 col-12">
-                    <label className="form-label">Claimed Date</label>
+                    <label className="form-label">Launch Date</label>
                     <input
                         type="date"
                         className="form-control"

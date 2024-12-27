@@ -7,6 +7,7 @@ export default function DomainForm({ onAddDomain, tableData }) {
         email: "",
         service: "",
         description: "",
+        renewal_amt: "",
         sDate: "",
         eDate: ""
     });
@@ -68,38 +69,66 @@ export default function DomainForm({ onAddDomain, tableData }) {
         }));
     };
 
+    // const clickButton = async () => {
+    //     const { name, phone, email, service, description, sDate, eDate } = Details;
+    //     if (!name || !phone || !email || !service || !description || !sDate || !eDate) {
+    //         alert("All fields must be filled out.");
+    //         return;
+    //     }
+
+    //     const phoneRegex = /^[0-9]{10}$/;
+    //     if (!phoneRegex.test(phone)) {
+    //         alert("Phone number must be exactly 10 digits and contain only numbers.");
+    //         return;
+    //     }
+
+    //     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //     if (!emailRegex.test(email)) {
+    //         alert("Please enter a valid email address.");
+    //         return;
+    //     }
+
+    //     console.log(Details);
+    //     onAddDomain(Details);
+
+    //     setDetails({
+    //         name: '',
+    //         phone: '',
+    //         email: '',
+    //         service: '',
+    //         description: '',
+    //         sDate: '',
+    //         eDate: ''
+    //     });
+    //     setAddingNew({ name: false, phone: false, email: false });
+    // };
+
     const clickButton = async () => {
-        const { name, phone, email, service, description, sDate, eDate } = Details;
-        if (!name || !phone || !email || !service || !description || !sDate || !eDate) {
+        const { name, phone, email, service, description, renewal_amt, sDate, eDate } = Details;
+        if (!name || !phone || !email || !service || !description || !renewal_amt || !sDate || !eDate) {
             alert("All fields must be filled out.");
             return;
         }
 
-        const phoneRegex = /^[0-9]{10}$/;
-        if (!phoneRegex.test(phone)) {
-            alert("Phone number must be exactly 10 digits and contain only numbers.");
+        // Ensure `renewal_amt` is a valid number
+        if (isNaN(renewal_amt) || Number(renewal_amt) <= 0) {
+            alert("Renewal amount must be a positive number.");
             return;
         }
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            alert("Please enter a valid email address.");
-            return;
-        }
-
-        console.log(Details);
         onAddDomain(Details);
 
+        // Reset the form
         setDetails({
             name: '',
             phone: '',
             email: '',
             service: '',
             description: '',
+            renewal_amt: '',
             sDate: '',
             eDate: ''
         });
-        setAddingNew({ name: false, phone: false, email: false });
     };
 
     return (
@@ -217,9 +246,22 @@ export default function DomainForm({ onAddDomain, tableData }) {
                     </select>
                 </div>
 
-                <div className="mb-3 col-md-12 col-12">
+                <div className="mb-3 col-md-6 col-12">
                     <label className="form-label text-dark">Service Description</label>
                     <input type="text" className="form-control" id="description" value={Details.description} name='description' onChange={handleFieldChange} />
+                </div>
+
+                <div className="mb-3 col-md-6 col-12">
+                    <label className="form-label text-dark">Renewal Amount</label>
+                    <input
+                        type="number"
+                        className="form-control"
+                        id="renewal_amt"
+                        value={Details.renewal_amt}
+                        name="renewal_amt"
+                        onChange={handleFieldChange}
+                        placeholder="Enter renewal amount"
+                    />
                 </div>
 
                 <div className="mb-3 col-md-6 col-12">

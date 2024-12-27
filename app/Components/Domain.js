@@ -17,18 +17,31 @@ export default function Domain() {
   const [clientData, setClientData] = useState([]);
 
   // Fetch data from the API
+  // const fetchDomains = async () => {
+  //   try {
+  //     const response = await axios.get('https://expirio.vercel.app/api/Domains');
+  //     const data = response.data.map((item, index) => ({
+  //       id: index + 1,
+  //       ...item,
+  //     }));
+  //     setTableData(data);
+  //   } catch (error) {
+  //     console.error('Error fetching domains:', error);
+  //   }
+  // };
+
   const fetchDomains = async () => {
     try {
-      const response = await axios.get('https://expirio.vercel.app/api/Domains');
-      const data = response.data.map((item, index) => ({
-        id: index + 1,
-        ...item,
-      }));
-      setTableData(data);
+        const response = await axios.get('https://expirio.vercel.app/api/Domains');
+        const data = response.data.map((item, index) => ({
+            id: index + 1,
+            ...item,
+        }));
+        setTableData(data);
     } catch (error) {
-      console.error('Error fetching domains:', error);
+        console.error('Error fetching domains:', error);
     }
-  };
+};
 
   const getClientData = async () => {
     try {
@@ -70,6 +83,11 @@ export default function Domain() {
       {
         accessorKey: 'description',
         header: 'Description',
+      },
+      {
+        accessorKey: 'renewal_amt',
+        header: 'Renewal Amount',
+        cell: ({ getValue }) => <span>&#8377; {getValue()}</span>, // Format as currency
       },
       {
         accessorKey: 'sDate',

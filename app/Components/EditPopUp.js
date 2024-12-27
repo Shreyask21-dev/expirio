@@ -9,14 +9,26 @@ export default function EditPopUp({ currentRecord, onClose, onUpdate }) {
 
     const [formData, setFormData] = useState(() => ({
         ...currentRecord,
+        renewal_amt: currentRecord?.renewal_amt || '',
         sDate: currentRecord?.sDate ? formatToISODate(currentRecord.sDate) : '',
         eDate: currentRecord?.eDate ? formatToISODate(currentRecord.eDate) : '',
     }));
+
+    // useEffect(() => {
+    //     if (currentRecord) {
+    //         setFormData({
+    //             ...currentRecord,
+    //             sDate: currentRecord.sDate ? formatToISODate(currentRecord.sDate) : '',
+    //             eDate: currentRecord.eDate ? formatToISODate(currentRecord.eDate) : '',
+    //         });
+    //     }
+    // }, [currentRecord]);
 
     useEffect(() => {
         if (currentRecord) {
             setFormData({
                 ...currentRecord,
+                renewal_amt: currentRecord.renewal_amt || '', // Add renewal_amt
                 sDate: currentRecord.sDate ? formatToISODate(currentRecord.sDate) : '',
                 eDate: currentRecord.eDate ? formatToISODate(currentRecord.eDate) : '',
             });
@@ -50,18 +62,27 @@ export default function EditPopUp({ currentRecord, onClose, onUpdate }) {
                 zIndex: 1000,
             }}
         >
+            <style>
+                {`
+                    @media only screen and (max-width: 600px) {
+                        .popup-content {
+                            width:75% !important;
+                        }
+                    }
+                `}
+            </style>
             <div
                 className="popup-content"
                 style={{
                     background: 'white',
                     padding: '20px',
                     borderRadius: '5px',
-                    width: '400px',
+                    width: '50%',
                 }}
             >
-                <h3>Edit Record</h3>
-                <form onSubmit={handleSubmit}>
-                    <div className="form-group mb-2">
+                <h3 className='text-center'>Edit Record</h3>
+                <form onSubmit={handleSubmit} className='row'>
+                    <div className="form-group mb-2 col-md-6 col-12">
                         <label className="form-label">Name</label>
                         <input
                             type="text"
@@ -71,7 +92,7 @@ export default function EditPopUp({ currentRecord, onClose, onUpdate }) {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="form-group mb-2">
+                    <div className="form-group mb-2  col-md-6 col-12">
                         <label className="form-label">Phone</label>
                         <input
                             type="text"
@@ -81,7 +102,7 @@ export default function EditPopUp({ currentRecord, onClose, onUpdate }) {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="form-group mb-2">
+                    <div className="form-group mb-2  col-md-6 col-12">
                         <label className="form-label">Email</label>
                         <input
                             type="email"
@@ -91,7 +112,7 @@ export default function EditPopUp({ currentRecord, onClose, onUpdate }) {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="form-group mb-2">
+                    <div className="form-group mb-2  col-md-6 col-12">
                         <label className="form-label">Service Name</label>
                         <select
                             className="form-control"
@@ -111,7 +132,7 @@ export default function EditPopUp({ currentRecord, onClose, onUpdate }) {
                         </select>
                     </div>
 
-                    <div className="form-group mb-2">
+                    <div className="form-group mb-2  col-md-6 col-12">
                         <label className="form-label">Description</label>
                         <input
                             type="text"
@@ -122,7 +143,19 @@ export default function EditPopUp({ currentRecord, onClose, onUpdate }) {
                         />
                     </div>
 
-                    <div className="form-group mb-2">
+                    <div className="form-group mb-2 col-md-6 col-12">
+                        <label className="form-label">Renewal Amount</label>
+                        <input
+                            type="number"
+                            className="form-control"
+                            name="renewal_amt"
+                            value={formData.renewal_amt || ''}
+                            onChange={handleChange}
+                            placeholder="Enter renewal amount"
+                        />
+                    </div>
+
+                    <div className="form-group mb-2 col-md-6 col-12">
                         <label className="form-label">Claimed Date</label>
                         <input
                             type="date"
@@ -133,7 +166,7 @@ export default function EditPopUp({ currentRecord, onClose, onUpdate }) {
                             onChange={handleChange}
                         />
                     </div>
-                    <div className="form-group mb-2">
+                    <div className="form-group mb-2 col-md-6 col-12">
                         <label className="form-label">Expiry Date</label>
                         <input
                             type="date"
@@ -145,19 +178,21 @@ export default function EditPopUp({ currentRecord, onClose, onUpdate }) {
                         />
                     </div>
                     <div
-                        className="d-flex justify-content-around"
-                        style={{ width: '60%' }}
+                        className="d-flex justify-content-center m-4"
                     >
-                        <button type="submit" className="btn btn-outline-primary">
+                        <div>
+
+                        <button type="submit" className="btn btn-outline-primary mx-2">
                             Save Changes
                         </button>
                         <button
                             type="button"
                             onClick={onClose}
-                            className="btn btn-outline-primary"
+                            className="btn btn-outline-primary mx-2"
                         >
                             Cancel
                         </button>
+                        </div>
                     </div>
                 </form>
             </div>

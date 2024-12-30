@@ -80,9 +80,9 @@ export default function DomainForm({ onAddDomain, tableData }) {
     //         return;
     //     }
 
-    //     const phoneRegex = /^[0-9]{10}$/;
+    //     const phoneRegex = /^[0-9]{10,15}$/;
     //     if (!phoneRegex.test(phone)) {
-    //         alert("Phone number must be exactly 10 digits and contain only numbers.");
+    //         alert("Phone number must be exactly min 10 digits and max 15 digits and contain only numbers.");
     //         return;
     //     }
 

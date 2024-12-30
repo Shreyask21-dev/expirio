@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function DomainForm({ onAddDomain, tableData }) {
+
+    const router = useRouter()
+
     const [Details, setDetails] = useState({
         name: "",
         phone: "",
@@ -155,13 +159,7 @@ export default function DomainForm({ onAddDomain, tableData }) {
                                 <option value="Add New">Add New</option>
                             </select>
                             {Details.name === "Add New" && (
-                                <button
-                                    type="button"
-                                    className="btn btn-link"
-                                    onClick={() => handleAddNew("name")}
-                                >
-                                    Add New Name
-                                </button>
+                                router.push('/Clients')
                             )}
                         </>
                     ) : (

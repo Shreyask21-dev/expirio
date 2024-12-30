@@ -5,15 +5,17 @@ export async function GET(request) {
     console.log(request.method)
 
     const dbconfig = {
+        host: '157.173.216.182',
+        user: 'u350066759_subscribe',
+        password: 'Coinage@141224',
+        database: 'u350066759_subscoin'
+
+
         // host:'localhost',
         // user:'root',
         // password:'',
         // database:'expirio'
 
-        host: '157.173.216.182',
-        user: 'u350066759_subscribe',
-        password: 'Coinage@141224',
-        database: 'u350066759_subscoin'
     }
 
     let connection
@@ -56,15 +58,16 @@ export async function POST(request) {
     console.log(request.method);
 
     const dbconfig = {
+        host: '157.173.216.182',
+        user: 'u350066759_subscribe',
+        password: 'Coinage@141224',
+        database: 'u350066759_subscoin',
+
         // host: 'localhost',
         // user: 'root',
         // password: '',
         // database: 'expirio',
 
-        host: '157.173.216.182',
-        user: 'u350066759_subscribe',
-        password: 'Coinage@141224',
-        database: 'u350066759_subscoin',
     };
 
     let connection;
@@ -137,15 +140,16 @@ export async function DELETE(request) {
     console.log(request.method);
 
     const dbconfig = {
-        // host: 'localhost',
-        // user: 'root',
-        // password: '',
-        // database: 'expirio',
-
+        
         host: '157.173.216.182',
         user: 'u350066759_subscribe',
         password: 'Coinage@141224',
         database: 'u350066759_subscoin'
+
+        // host: 'localhost',
+        // user: 'root',
+        // password: '',
+        // database: 'expirio',
     };
 
     let connection;
@@ -219,15 +223,16 @@ export async function PUT(request) {
     console.log(request.method);
 
     const dbconfig = {
+        host: '157.173.216.182',
+        user: 'u350066759_subscribe',
+        password: 'Coinage@141224',
+        database: 'u350066759_subscoin'
+        
         // host: 'localhost',
         // user: 'root',
         // password: '',
         // database: 'expirio',
 
-        host: '157.173.216.182',
-        user: 'u350066759_subscribe',
-        password: 'Coinage@141224',
-        database: 'u350066759_subscoin'
     };
 
     let connection;

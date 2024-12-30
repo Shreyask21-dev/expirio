@@ -8,6 +8,11 @@ export async function GET(request) {
         user: 'u350066759_subscribe',
         password: 'Coinage@141224',
         database: 'u350066759_subscoin'
+
+        // host: 'localhost',
+        // user: 'root',
+        // password: '',
+        // database: 'expirio',
     };
 
     let connection;
@@ -52,6 +57,11 @@ export async function POST(request) {
         user: 'u350066759_subscribe',
         password: 'Coinage@141224',
         database: 'u350066759_subscoin'
+
+        // host: 'localhost',
+        // user: 'root',
+        // password: '',
+        // database: 'expirio',
     };
 
     let connection;
@@ -122,6 +132,11 @@ export async function DELETE(request) {
         user: 'u350066759_subscribe',
         password: 'Coinage@141224',
         database: 'u350066759_subscoin'
+
+        // host: 'localhost',
+        // user: 'root',
+        // password: '',
+        // database: 'expirio',
     };
 
     let connection;
@@ -190,6 +205,11 @@ export async function PUT(request) {
         user: 'u350066759_subscribe',
         password: 'Coinage@141224',
         database: 'u350066759_subscoin'
+
+        // host: 'localhost',
+        // user: 'root',
+        // password: '',
+        // database: 'expirio',
     };
 
     let connection;

@@ -27,9 +27,9 @@ export default function ClientForm({ onAdd }) {
         }
     
         // Phone validation: Check if phone is exactly 10 digits and only numbers
-        const phoneRegex = /^[0-9]{10}$/; // Regular expression for 10 digits
+        const phoneRegex = /^[0-9]{10,15}$/; // Regular expression for 10 digits
         if (!phoneRegex.test(phone)) {
-            alert("Phone number must be exactly 10 digits and contain only numbers.");
+            alert("Phone number must be exactly min 10 digits and max 15 digits and contain only numbers.");
             return; // Exit the function if phone validation fails
         }
     
@@ -55,7 +55,7 @@ export default function ClientForm({ onAdd }) {
 
     return (
         <div style={{backgroundColor:"#ffffff"}}>
-            <h1 className='text-dark'>Client Addition Form</h1>
+            <h1 className='text-dark'>Add Client</h1>
             <div className="row">
 
                 <div className="mb-3 col-md-6 col-12">
